@@ -299,14 +299,11 @@ class WindSimulation:
         """Draw user interface information"""
         try:
             # Wind information
-            strength_bar = '|' * int(self.wind_strength * 4)
-            direction_char = '→' if self.wind_direction > 0 else '←'
-            info_line = f"Wind: {strength_bar} {self.wind_strength:.1f} {direction_char}"
+            info_line = f""
             
             if self.gust_active:
-                info_line += " 💨 GUST!"
+                info_line += ""
                 
-            info_line += f" Parts: {len(self.particles)}"
             
             self.stdscr.addstr(0, 0, info_line, curses.A_BOLD)
             
@@ -318,13 +315,6 @@ class WindSimulation:
             if len(help_text) < self.cols:
                 self.stdscr.addstr(self.rows - 1, 0, help_text, curses.A_DIM)
                 
-            # Mode indicator
-            mode_text = f"Mode: {'HIGH DENSITY' if self.high_density else 'Normal'}"
-            if self.show_density:
-                mode_text += " | DENSITY VISUALIZATION"
-                
-            if len(mode_text) < self.cols:
-                self.stdscr.addstr(1, 0, mode_text, curses.A_DIM)
                 
         except curses.error:
             pass
